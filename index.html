@@ -848,6 +848,7 @@ which corresponds to a deviation of ${(100 * sy * Math.sin(alpha / 180. * Math.P
             geometrystr = geometrystr.replace(/\r/gm, ``); // convert CRLF to LF
             geometrystr = geometrystr.replace(/\n(\t| )*\n/gm, `\n`); // delete lines which just have white space
             geometrystr = geometrystr.replace(/\n+/gm, `\n`); // delete lines that are compeltely empty
+            geometrystr = geometrystr.replace(/^\n/gm, ``); // delete LF at the beginning
             geometrystr = geometrystr.replace(/\n$/gm, ``); // delete the very last LF
             geometrystr = geometrystr.replace(/(\t| )+/gm, ` `); // replace (multiple) white spaces with space 0x20
             geometrystr = geometrystr.replace(/^ /gm, `\n`); // replace space at the beginning of the line 
@@ -857,7 +858,7 @@ which corresponds to a deviation of ${(100 * sy * Math.sin(alpha / 180. * Math.P
             for (let line of geometrystr) {
                 let t = line.split(' ');
                 
-                switch (t[0]) {
+                switch (t[0].toLowerCase()) {
                     case 'line':
                         geometryelements.push({type: 'line', length: parseFloat(t[1])});
                         break;
@@ -886,7 +887,7 @@ which corresponds to a deviation of ${(100 * sy * Math.sin(alpha / 180. * Math.P
             // let elements = [{type: 'line', length: 100}, {type: 'curve', radius: 25, angle: 90}, {type: 'angle', angle: 30}, {type: 'line', length: 500}];
             console.log('elements assigned')
             let mybeam = beam(geometryelements, width, minthickness, young, force, relforceangle, deflection);
-            console_log(mybeam)
+            console_log(mybeam);
 
             
             // Plot the beam 
