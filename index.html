@@ -105,8 +105,10 @@ https://blog.hubspot.com/website/css-margin-vs-padding#:~:text=In%20CSS%2C%20a%2
          
         <br>
         <button id="analyse" type="button" class="btn btn-primary">Analyse beam</button>
-
+        <br>
+        <br>
         <div id="beamplot"></div>
+        <br>
         <div id="torquesplot"></div>
         </p>
 
@@ -664,7 +666,7 @@ which corresponds to a deviation of ${(100 * sy * Math.sin(alpha / 180. * Math.P
             // useful for debugging on android browser
             console.log(x)
 
-            $('#console_log').append(`${JSON.stringify(x)}</br>`)
+            // $('#console_log').append(`${JSON.stringify(x)}</br>`)
         }
 
 
@@ -889,7 +891,7 @@ which corresponds to a deviation of ${(100 * sy * Math.sin(alpha / 180. * Math.P
             
             // Plot the beam 
             // get a square to which the beam will be put in the lower left corner
-            let side = Math.max(mybeam.xmax - mybeam.xmin, mybeam.ymax - mybeam.ymin)
+            let side = Math.max(mybeam.xmax - mybeam.xmin, mybeam.ymax - mybeam.ymin) * 1.1
 
             let beamtrace = {
                 x: mybeam.xs,
@@ -902,10 +904,11 @@ which corresponds to a deviation of ${(100 * sy * Math.sin(alpha / 180. * Math.P
                 },
             }
 
+            // (mybeam.xmin + mybeam.xmax - side) / 2
 
             let layout = {
-                xaxis: {range: [mybeam.xmin, mybeam.xmin + side]},
-                yaxis: {range: [mybeam.ymin, mybeam.ymin + side]},
+                xaxis: {range: [(mybeam.xmin + mybeam.xmax - side) / 2, (mybeam.xmin + mybeam.xmax + side) / 2]},
+                yaxis: {range: [(mybeam.ymin + mybeam.ymax - side) / 2, (mybeam.ymin + mybeam.ymax + side) / 2]},
                 width: 500,
                 hight: 500
             }
